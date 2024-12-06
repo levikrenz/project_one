@@ -1,23 +1,23 @@
 import requests
 
 def to_farenheit(degrees):  
-    tempF = (degrees*1.8)+32 #does the calculation from celsius to farenheit
-    tempF = round(tempF) #makes sure that the number doesn't have decimal points
+    tempF = (degrees*1.8)+32 # does the calculation from celsius to farenheit
+    tempF = round(tempF) # makes sure that the number doesn't have decimal points
     return tempF
 
 def getcityweather(city): 
 
-    apikey = "a12e2390dac14b21b229d51e7cbe0488" #this api key does expire in december 16th I didn't realize this until after I finished this project
-    url = f'https://api.weatherbit.io/v2.0/current?&city={city}&key={apikey}&include=minutely' #sets the url with the city variable and the api key 
+    apikey = "a12e2390dac14b21b229d51e7cbe0488" # this api key does expire in december 16th I didn't realize this until after I finished this project
+    url = f'https://api.weatherbit.io/v2.0/current?&city={city}&key={apikey}&include=minutely' # sets the url with the city variable and the api key 
     #the url is the website where we are going to get all of our information for that specific city
-    response = requests.get(url) #finds the informarion from the the website we give it
-    data = response.json()['data'][0] #sets all the found information into a variable
+    response = requests.get(url) # gets all of the information from the website
+    data = response.json()['data'][0] # gets the specific information we need for the temperature
 
-    weather_desc = data['weather']['description'] #uses the data that we just got from the website to get the weather
-    temp = to_farenheit(data['temp']) #does same thing just with the tempuature
+    weather_desc = data['weather']['description'] #  gets the weather like rainy or snowy
+    temp = to_farenheit(data['temp']) # converts the temperature to farenheit
 
     
-    print(f'Weather: {weather_desc}\n{temp} Degrees farenheit') #prints the weather
+    print(f'Weather: {weather_desc}\n{temp} Degrees farenheit') # prints the information we need
 
 print("what city do you want the temperatuare of?")
-getcityweather(input()) #calls the function after recieving an input
+getcityweather(input()) # calls the function after recieving an input
